@@ -9,13 +9,13 @@ const firebaseConfig = {
     messagingSenderId: "845076216608",
     appId: "1:845076216608:web:8b8eef4bfc36d720d5f545"
   };
+
+const MAIN_CHILD = '/downloads';
 const app = Firebase.initializeApp(firebaseConfig);
 const db = app.database();
-const downloadsRef = db.ref();
-// console.log('on');
-// downloadsRef.on('value', snap=>console.log(snap.val()));
+const downloadsRef = db.ref(MAIN_CHILD);
 
-export {
+export default {
     db,
     downloadsRef
 }

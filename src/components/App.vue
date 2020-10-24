@@ -13,7 +13,6 @@ import NavBar from './NavBar'
 import Filters from './Filters'
 import Viz from './Viz'
 import Counter from './Counter'
-import db from '../lib/firebase'
 
   export default {
     name: 'app',
