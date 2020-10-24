@@ -1,6 +1,10 @@
 # empatica-dashboard
 
 > A dashboard for empatica apps downloads
+### How to run
+> Download repo
+> docker-compose up
+> Visit  [localhost:4000](localhost:4000)
 
 ## Commands
 
