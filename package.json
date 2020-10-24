@@ -17,11 +17,13 @@
     "email": "umberto.difabrizio@gmail.com"
   },
   "dependencies": {
+    "d3": "^6.2.0",
     "firebase": "^7.24.0",
     "normalize.css": "^7.0.0",
     "object-assign": "^4.1.1",
     "promise-polyfill": "^6.0.2",
-    "vue-material": "^1.0.0-beta-15"
+    "vue-material": "^1.0.0-beta-15",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "poi": "^9.0.0",
