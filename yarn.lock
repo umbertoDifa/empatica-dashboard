@@ -10186,7 +10186,7 @@ moment@2.28.0:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.28.0.tgz#cdfe73ce01327cee6537b0fafac2e0f21a237d75"
   integrity sha512-Z5KOjYmnHyd/ukynmFd/WwyXHd7L4J9vTI/nn5Ap9AVUgaAE15VvQ9MOGmJJygEUklupqIrFnor/tjTwRU+tQw==
 
-moment@^2.22.1:
+moment@^2.22.1, moment@^2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
@@ -14512,6 +14512,13 @@ vue-toc@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/vue-toc/-/vue-toc-0.0.1.tgz#6a4dfa9c144445679705cd7b991a1a73ac080cc0"
   integrity sha512-RZfVgLzk/kpEmk05ptvU/+x3TVo4Ai4BBARvV4iCurR9bJsAqnnrqwjEBKnEG+s6NT0yQ6EY0JMGViyOUGysDw==
+  dependencies:
+    vue "^2.6.10"
+
+vue2-daterange-picker@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/vue2-daterange-picker/-/vue2-daterange-picker-0.6.1.tgz#65acd444b9fe7c8a6fac34fb76451d70266d3c39"
+  integrity sha512-UrPfu5SQXc5T4ka1aTN9RiVGXQN2T93IoFrrcJ+/ncPPeaTNx8JRRhK78Au7/Gx1NleKU+CugiyQxlvnp+OA1g==
   dependencies:
     vue "^2.6.10"
 

@@ -49,7 +49,7 @@ export default {
             data.forEach(d => d.time = new Date(d.downloaded_at * 1000));
             console.log(data)
 
-            var x = d3.scaleTime().range([0, this.width]);
+            var x = d3.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
             var y = d3.scaleLinear().range([this.height, 0]);
 
             var timestampExtent = d3.extent(data, d => d.time);
@@ -102,7 +102,7 @@ export default {
             this.mainG = d3
             .select("#barchart")
             .append("svg")
-                .attr("width", this.width + this.margin.left + this.margin.right)
+                .attr("width", "100%")
                 .attr("height", this.height + this.margin.top + this.margin.bottom)
             .append("g")
             .style(
@@ -124,7 +124,7 @@ export default {
                 marginBetweenBars: 5,
             },
             svg: null,
-            width: 750,
+            width: window.innerWidth,
             height: 400,
             margin: {
                 top: 50,

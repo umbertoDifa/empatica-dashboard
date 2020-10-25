@@ -22,9 +22,9 @@ export default {
         fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
   },
-  mounted() {
-      this.fetchData({startTimestamp:0, endTimestamp:1603500361});
-  },
+  // mounted() {
+  //     this.fetchData({startTimestamp:0, endTimestamp:1603500361});
+  // },
   components: {
       BarChart,
   }

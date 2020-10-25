@@ -8,7 +8,7 @@ import {state} from './state'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state,
+    state: {...state},
     mutations: mutations.map,
     actions: actions.map,
     getters: getters.map,

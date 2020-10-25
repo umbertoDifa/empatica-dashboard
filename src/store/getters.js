@@ -1,3 +1,5 @@
+import _ from 'lodash';    
+import moment from 'moment'
 
 const names = {
     'COUNTRIES': 'COUNTRIES',
@@ -8,9 +10,24 @@ const names = {
 const worldCountry = 'WORLD';
 
 function getFilteredDataPoints(state, getters){
-    return getters.DATA_POINTS.filter(dp => !state.selectedCountry 
-        || state.selectedCountry == worldCountry 
-        || dp.country == state.selectedCountry)
+
+    function filterByCountry(points, selectedCountry){
+        return points.filter(dp => !selectedCountry 
+            || selectedCountry == worldCountry 
+            || dp.country == selectedCountry);
+    }
+    
+    function filterByRange(points, dateRange){
+        if (!dateRange || _.isEmpty(dateRange) ) {
+            return points;
+        }
+
+        const unixStartDate = moment(dateRange.startDate).unix();
+        const unixEndDate = moment(dateRange.endDate).unix();
+        return points.filter(dp => dp.downloaded_at >= unixStartDate && dp.downloaded_at <= unixEndDate);
+    }
+
+    return filterByRange(filterByCountry(getters.DATA_POINTS, state.selectedCountry), state.dateRange);
 }
 
 function getCountries(state){
