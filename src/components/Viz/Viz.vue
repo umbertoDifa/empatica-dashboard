@@ -1,12 +1,14 @@
 <template>
   <div id="viz">
-    <BarChart :data="dataPoints"></BarChart>
+    <!-- <BarChart :data="dataPoints"></BarChart> -->
+    <Map></Map>
   </div>
 </template>
 
 <script>
 import actions from '../../store/actions'
 import BarChart from '../BarChart/BarChart'
+import Map from '../Map/Map'
 import { mapActions, mapGetters } from 'vuex'
 import getters from '../../store/getters'
 
@@ -22,11 +24,9 @@ export default {
         fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
   },
-  // mounted() {
-  //     this.fetchData({startTimestamp:0, endTimestamp:1603500361});
-  // },
   components: {
       BarChart,
+      Map,
   }
 }
 </script>

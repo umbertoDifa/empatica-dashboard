@@ -124,7 +124,7 @@ export default {
                 marginBetweenBars: 5,
             },
             svg: null,
-            width: window.innerWidth,
+            width: 800,
             height: 400,
             margin: {
                 top: 50,
@@ -142,6 +142,10 @@ export default {
     mounted() {
         this.buildContainers();
         this.buildAxes();
+
+        const rect = this.$el.getBoundingClientRect();
+        this.width = rect.width;
+        this.updateBarChart();
     },
 }
 </script>
