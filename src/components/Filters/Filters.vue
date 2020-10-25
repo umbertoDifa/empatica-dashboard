@@ -11,6 +11,7 @@
           >
             <md-option
               v-for="country in countries"
+              :class="country"
               :key="country"
               :value="country"
             >
@@ -20,7 +21,10 @@
         </md-field>
       </div>
       <div class="md-layout-item md-size-15">
-        <md-button @click="() => resetFilters()" class="md-primary"
+        <md-button
+          @click="() => resetFilters()"
+          id="reset-button"
+          class="md-primary"
           >Reset</md-button
         >
       </div>

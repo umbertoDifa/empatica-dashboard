@@ -10,7 +10,8 @@
     "build": "poi build",
     "report": "poi build --bundle-report",
     "serve": "serve dist --single",
-    "test": "tyu"
+    "test": "tyu",
+    "test:debug": "node --inspect-brk node_modules/.bin/vue-cli-service test:unit --no-cache --watch --runInBand"
   },
   "author": {
     "name": "Umberto Di Fabrizio",
@@ -25,10 +26,13 @@
     "object-assign": "^4.1.1",
     "prettier": "^2.1.2",
     "promise-polyfill": "^6.0.2",
+    "vue-jest": "^3.0.7",
     "vue-material": "^1.0.0-beta-15",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@vue/cli": "^4.5.8",
+    "@vue/test-utils": "^1.1.0",
     "poi": "^9.0.0",
     "poi-preset-bundle-report": "^2.0.0",
     "serve": "^6.1.0",

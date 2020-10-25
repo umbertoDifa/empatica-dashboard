@@ -8,11 +8,14 @@
 </template>
 
 <script>
-
+import VueMaterial from 'vue-material'
+import Vue from 'vue'
 import NavBar from '../NavBar/NavBar'
 import Filters from '../Filters/Filters'
 import Viz from '../Viz/Viz'
 import Counter from '../Counter/Counter'
+
+Vue.use(VueMaterial);
 
   export default {
     name: 'app',

@@ -25,6 +25,7 @@ function countrySelected({commit}, country){
 }
 
 function resetFilters({dispatch}){
+    console.log('resetting f');
     dispatch(names.COUNTRY_SELECTED, 'WORLD');
 }
 
