@@ -5,4 +5,4 @@ services:
     volumes:
       - ./:/code/empatica-dashboard
     ports:
-      - "4000:4000"
+      - "5000:4000"

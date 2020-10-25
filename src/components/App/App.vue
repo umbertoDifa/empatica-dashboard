@@ -9,10 +9,10 @@
 
 <script>
 
-import NavBar from './NavBar'
-import Filters from './Filters'
-import Viz from './Viz'
-import Counter from './Counter'
+import NavBar from '../NavBar/NavBar'
+import Filters from '../Filters/Filters'
+import Viz from '../Viz/Viz'
+import Counter from '../Counter/Counter'
 
   export default {
     name: 'app',

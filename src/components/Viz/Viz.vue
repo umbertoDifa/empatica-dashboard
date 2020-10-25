@@ -1,14 +1,14 @@
 <template>
-    <div id='viz'>
-        <BarChart :data="dataPoints"></BarChart>
-    </div>
+  <div id="viz">
+    <BarChart :data="dataPoints"></BarChart>
+  </div>
 </template>
 
 <script>
-import actions from '../store/actions'
-import BarChart from './BarChart'
+import actions from '../../store/actions'
+import BarChart from '../BarChart/BarChart'
 import { mapActions, mapGetters } from 'vuex'
-import getters from '../store/getters'
+import getters from '../../store/getters'
 
 export default {
   name: 'Viz',
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     ...mapActions({
-        fetchData: actions.names.DOWNLOADS_UPDATED, 
+        fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
   },
   mounted() {
@@ -32,8 +32,8 @@ export default {
 </script>
 
 <style scoped>
- #viz {
-    min-height: 400px;
-    background-color: greenyellow;
- }
+#viz {
+  min-height: 400px;
+  background-color: greenyellow;
+}
 </style>

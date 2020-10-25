@@ -1,11 +1,10 @@
 <template>
-    <div id='barchart'>
-    </div>
+  <div id="barchart"></div>
 </template>
 
 <script>
 import * as d3 from "d3";
-import timeUtils from '../utils/timeUtils'
+import timeUtils from '../../utils/timeUtils'
 
 export default {
     name: 'BarChart',
@@ -18,11 +17,11 @@ export default {
                 selection
                     .attr("x", 1)
                     .attr("transform", d => {
-                        return "translate(" + x(timeUtils.floorHour(d.x0)) + "," + y(d.length) + ")"; 
+                        return "translate(" + x(timeUtils.floorHour(d.x0)) + "," + y(d.length) + ")";
                         })
                     .attr("width", d =>  x(timeUtils.ceilHour(d.x1)) - x(timeUtils.floorHour(d.x0)) - this.config.marginBetweenBars)
                     .attr("height",d => {
-                        return this.height - y(d.length); 
+                        return this.height - y(d.length);
                     });
             }
 
@@ -32,7 +31,7 @@ export default {
 
                 this.xAxisG.transition(t)
                     .call(xAxis);
-                
+
                 const yAxis = d3.axisLeft(y)
                     .ticks(6);
 
@@ -86,10 +85,10 @@ export default {
                 .enter()
                 .append("rect")
                 .attr("class", "bar");
-                
+
             updateChartSelection.call(this,enterSelection);
             updateChartSelection.call(this, updateSelection.transition(t));
-                
+
             updateAxes.call(this);
         },
         clearChart() {
@@ -147,6 +146,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
