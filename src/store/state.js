@@ -7,6 +7,7 @@ const state = Object.freeze({
         startDate: moment(),//moment("2014-02-27T10:00:00"),
         endDate: moment(),
     },
+    lastDataPoint: [],
 });
 
 export {

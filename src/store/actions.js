@@ -8,6 +8,7 @@ const names = {
     'COUNTRY_SELECTED': 'COUNTRY_SELECTED',
     'RESET_FILTERS':'RESET_FILTERS',
     'RANGE_SELECTED':'RANGE_SELECTED',
+    'NEW_DATA_POINT_RECEIVED': 'NEW_DATA_POINT_RECEIVED',
 };
 
 const downloadsRef = firebase.downloadsRef;
@@ -41,12 +42,17 @@ function rangeSelected({commit, dispatch}, dateRange) {
     });
 }
 
+function newDataPointReceived({commit}, dataPoint){
+    console.log('commiting',dataPoint);
+    commit(mutations.names.UPDATE_LAST_DATAPOINT, dataPoint);
+}
 export default {
     map: {
         [names.FETCH_DOWNLOADS]: fetchDownloads,
         [names.COUNTRY_SELECTED]: countrySelected,
         [names.RESET_FILTERS]: resetFilters,
         [names.RANGE_SELECTED]: rangeSelected,
+        [names.NEW_DATA_POINT_RECEIVED]: newDataPointReceived,
     },
     names,
 }

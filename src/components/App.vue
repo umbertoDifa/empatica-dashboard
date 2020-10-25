@@ -8,21 +8,16 @@
 </template>
 
 <script>
-import VueMaterial from 'vue-material'
-import Vue from 'vue'
-import NavBar from '../NavBar/NavBar'
-import Filters from '../Filters/Filters'
-import Viz from '../Viz/Viz'
-import Counter from '../Counter/Counter'
-import firebase from '../../lib/firebase'
-import {mapActions} from 'vuex'
-import actions from '../../store/actions'
-
-Vue.use(VueMaterial);
+import firebase from '../lib/firebase'
+import NavBar from './NavBar'
+import Filters from './Filters'
+import Viz from './Viz'
+import Counter from './Counter'
+import actions from '../store/actions'
 
 export default {
     name: 'app',
-      methods: {
+     methods: {
     ...mapActions({
         newDataPointReceived: actions.names.NEW_DATA_POINT_RECEIVED,
       }),

@@ -1,14 +1,14 @@
 <template>
   <div id="viz">
     <!-- <BarChart :data="dataPoints"></BarChart> -->
-    <Map></Map>
+    <RealTimeMap></RealTimeMap>
   </div>
 </template>
 
 <script>
 import actions from '../../store/actions'
 import BarChart from '../BarChart/BarChart'
-import Map from '../Map/Map'
+import RealTimeMap from '../RealTimeMap/RealTimeMap'
 import { mapActions, mapGetters } from 'vuex'
 import getters from '../../store/getters'
 
@@ -26,7 +26,7 @@ export default {
   },
   components: {
       BarChart,
-      Map,
+      RealTimeMap,
   }
 }
 </script>
