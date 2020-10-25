@@ -3,6 +3,7 @@ import firebase from '../lib/firebase'
 
 const names = {
     'DOWNLOADS_UPDATED': 'DOWNLOADS_UPDATED',
+    'COUNTRY_SELECTED': 'COUNTRY_SELECTED',
 };
 
 const downloadsRef = firebase.downloadsRef;
@@ -20,9 +21,14 @@ function downloadsUpdated ({commit}, {startTimestamp, endTimestamp}) {
         });
 };
 
+function countrySelected({commit}, country){
+    commit(mutations.names.UPDATE_COUNTRY, country);
+}
+
 export default {
     map: {
         [names.DOWNLOADS_UPDATED]: downloadsUpdated,
+        [names.COUNTRY_SELECTED]: countrySelected,
     },
     names,
 }

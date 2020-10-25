@@ -1,21 +1,21 @@
 <template>
     <div id='viz'>
-        <BarChart :data="downloads"></BarChart>
+        <BarChart :data="dataPoints"></BarChart>
     </div>
 </template>
 
 <script>
 import actions from '../store/actions'
 import BarChart from './BarChart'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import getters from '../store/getters'
 
 export default {
   name: 'Viz',
   computed: {
-      downloads(){
-          console.log('updating downloads in viz...'); 
-          return Object.values(this.$store.state.downloads);;
-      }
+      ...mapGetters({
+          dataPoints: getters.names.FILTERED_DATA_POINTS,
+      })
   },
   methods: {
     ...mapActions({
