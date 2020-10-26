@@ -1,9 +1,9 @@
 FROM gitpod/workspace-full
 
-USER root
 
-RUN sudo apt-get update && \
-    sudo apt-get upgrade -y && \
+RUN sudo apt-get update
+
+RUN   sudo apt-get upgrade -y && \
     sudo apt-get install -y gnupg2 && \
     sudo apt-get install -y git && \
     sudo apt-get install -y curl &&\
