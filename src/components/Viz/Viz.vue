@@ -6,29 +6,29 @@
 </template>
 
 <script>
-import actions from '../../store/actions'
-import BarChart from '../BarChart/BarChart'
-import RealTimeMap from '../RealTimeMap/RealTimeMap'
-import { mapActions, mapGetters } from 'vuex'
-import getters from '../../store/getters'
+import actions from '../../store/actions';
+import BarChart from '../BarChart/BarChart';
+import RealTimeMap from '../RealTimeMap/RealTimeMap';
+import { mapActions, mapGetters } from 'vuex';
+import getters from '../../store/getters';
 
 export default {
   name: 'Viz',
   computed: {
-      ...mapGetters({
-          dataPoints: getters.names.FILTERED_DATA_POINTS,
-      })
+    ...mapGetters({
+      dataPoints: getters.names.FILTERED_DATA_POINTS,
+    }),
   },
   methods: {
     ...mapActions({
-        fetchData: actions.names.DOWNLOADS_UPDATED,
+      fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
   },
   components: {
-      BarChart,
-      RealTimeMap,
-  }
-}
+    BarChart,
+    RealTimeMap,
+  },
+};
 </script>
 
 <style scoped>

@@ -2,15 +2,24 @@
 
 # empatica-dashboard
 
-> A dashboard for empatica apps downloads
-### How to run
-> Download repo
-> docker-compose up
-> Visit  [localhost:4000](localhost:4000)
+> A dashboard to explore and visualize real time empatica apps downloads
+
+# How to run
+
+### Oldfashioned
+
+- Download repo
+- `docker-compose up`
+- Visit [localhost:4000](localhost:4000)
+
+### New trend!
+
+- Click on the gitpod badge above
+- The environment will be created and you'll be able to
+  1. See the live app
+  2. Make any change
 
 ## Commands
-
-You can replace `yarn` with `npm run` here.
 
 ```bash
 # build for production
@@ -25,20 +34,6 @@ yarn test
 # serve the bundled dist folder in production mode
 yarn serve
 ```
-
-## Polyfills
-
-By default we only polyfill `window.Promise` and `Object.assign`. You can add more polyfills in `./src/polyfills.js`.
-
-## Analyze bundle size
-
-Run `yarn report` to get a report of bundle size which helps you:
-
-- Realize what's really inside your bundle
-- Find out what modules make up the most of it's size
-- Find modules that got there by mistake
-- Optimize it!
-
 
 ---
 

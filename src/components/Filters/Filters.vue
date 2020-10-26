@@ -3,19 +3,14 @@
     <div class="md-layout md-gutter">
       <div class="md-layout-item filter">
         <md-field>
-          <md-select
-            v-model="selectedCountry"
-            name="country"
-            id="country"
-            placeholder="Country"
-          >
+          <md-select v-model="selectedCountry" name="country" id="country" placeholder="Country">
             <md-option
               v-for="country in countries"
               :class="country"
               :key="country"
               :value="country"
             >
-              {{country}}
+              {{ country }}
             </md-option>
           </md-select>
         </md-field>
@@ -31,39 +26,35 @@
           :linkedCalendars="false"
           v-model="dateRange"
         >
-          <template v-slot:input="picker" style="min-width: 350px;">
-            {{moment(dateRange.startDate).format("MMMM Do YYYY, HH:mm")}} -
-            {{moment(dateRange.endDate).format("MMMM Do YYYY, HH:mm")}}
+          <template v-slot:input="picker" style="min-width: 350px">
+            {{ moment(dateRange.startDate).format('MMMM Do YYYY, HH:mm') }} -
+            {{ moment(dateRange.endDate).format('MMMM Do YYYY, HH:mm') }}
           </template>
         </DateRangePicker>
       </div>
       <div class="md-layout-item md-size-15">
-        <md-button
-          @click="() => resetFilters()"
-          id="reset-button"
-          class="md-primary"
-          >Reset</md-button
-        >
+        <ResetButton></ResetButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
-import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
 
-import getters from '../../store/getters'
-import actions from '../../store/actions'
-import DateRangePicker from 'vue2-daterange-picker'
-import moment from 'moment'
+import getters from '../../store/getters';
+import actions from '../../store/actions';
+import DateRangePicker from 'vue2-daterange-picker';
+import moment from 'moment';
+import ResetButton from './ResetButton/ResetButton';
 
 export default {
   name: 'Filters',
   computed: {
     ...mapGetters({
-      countries : getters.names.COUNTRIES,
+      countries: getters.names.COUNTRIES,
     }),
     selectedCountry: {
       get() {
@@ -71,13 +62,13 @@ export default {
       },
       set(value) {
         this.countrySelected(value);
-      }
+      },
     },
     dateRange: {
       get() {
         return this.$store.state.dateRange;
       },
-      set(newRange){
+      set(newRange) {
         this.rangeSelected(newRange);
       },
     },
@@ -85,7 +76,6 @@ export default {
   methods: {
     ...mapActions({
       countrySelected: actions.names.COUNTRY_SELECTED,
-      resetFilters: actions.names.RESET_FILTERS,
       rangeSelected: actions.names.RANGE_SELECTED,
     }),
   },
@@ -94,8 +84,9 @@ export default {
   },
   components: {
     DateRangePicker,
+    ResetButton,
   },
-}
+};
 </script>
 <style>
 .drp-selected {
