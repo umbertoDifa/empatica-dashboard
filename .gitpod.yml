@@ -1,6 +1,7 @@
-image:
-  file: .gitpod.Dockerfile
 
+image: gitpod/workspace-full
 tasks:
   - init: yarn install && yarn run build
     command: yarn run dev
+ports:
+  - port: 4000
