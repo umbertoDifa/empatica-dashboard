@@ -1,0 +1,3 @@
+- Run `npm install`
+- Make changes to code
+- Deploy with `firebase deploy --only functions`
