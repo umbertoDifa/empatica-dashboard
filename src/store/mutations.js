@@ -6,6 +6,8 @@ const names = {
   UPDATE_RANGE: 'UPDATE_RANGE',
   UPDATE_LAST_DATAPOINT: 'UPDATE_LAST_DATAPOINT',
   UPDATE_REAL_TIME: 'UPDATE_REAL_TIME',
+  UPDATE_RANDOM_GENERATOR_CONFIG: 'UPDATE_RANDOM_GENERATOR_CONFIG',
+  FLUSH_DATA_POINTS: 'FLUSH_DATA_POINTS',
 };
 
 function updateDownloads(state, downloads) {
@@ -24,8 +26,16 @@ function updateLastDataPoint(state, dataPoint) {
   state.lastDataPoint = [...state.lastDataPoint, dataPoint];
 }
 
+function flushDataPoints(state) {
+  state.lastDataPoint = [];
+}
+
 function updateRealTime(state, newStatus) {
   state.isRealTimeActive = newStatus;
+}
+
+function updateRandomGeneratorConfig(state, config) {
+  state.randomGeneratorConfig = { ...config };
 }
 
 export default {
@@ -36,5 +46,7 @@ export default {
     [names.UPDATE_RANGE]: updateRange,
     [names.UPDATE_LAST_DATAPOINT]: updateLastDataPoint,
     [names.UPDATE_REAL_TIME]: updateRealTime,
+    [names.UPDATE_RANDOM_GENERATOR_CONFIG]: updateRandomGeneratorConfig,
+    [names.FLUSH_DATA_POINTS]: flushDataPoints,
   },
 };

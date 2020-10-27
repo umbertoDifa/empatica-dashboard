@@ -41,7 +41,7 @@ export default {
   },
   watch: {
     lastPoint(newQueue) {
-      console.log('showing dot');
+      console.log('showing dot', newQueue);
       //   this.clearDots()
       for (let i = this.processedPoints; i < newQueue.length; i++) {
         this.showDot(newQueue[i].lat, newQueue[i].lon);

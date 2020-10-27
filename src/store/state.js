@@ -9,6 +9,9 @@ const state = Object.freeze({
   },
   lastDataPoint: [],
   isRealTimeActive: false,
+  randomGeneratorConfig: {
+    delay: 1000,
+  },
 });
 
 export { state };

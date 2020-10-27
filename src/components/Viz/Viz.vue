@@ -27,9 +27,6 @@ export default {
       fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
   },
-  mounted() {
-    console.log('height', this.$el.clientHeight);
-  },
   components: {
     BarChart,
     RealTimeMap,

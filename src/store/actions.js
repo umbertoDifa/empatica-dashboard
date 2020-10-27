@@ -3,6 +3,7 @@ import firebase from '../lib/firebase';
 import { state } from '../store/state';
 import moment from 'moment';
 import geoUtils from '../utils/geoUtils';
+import { dispatch } from 'd3';
 
 const names = {
   FETCH_DOWNLOADS: 'FETCH_DOWNLOADS',
@@ -10,8 +11,10 @@ const names = {
   RESET_FILTERS: 'RESET_FILTERS',
   RANGE_SELECTED: 'RANGE_SELECTED',
   NEW_DATA_POINT_RECEIVED: 'NEW_DATA_POINT_RECEIVED',
-  GENERATE_RANDOM_DOWNLOADS: 'GENERATE_RANDOM_DOWNLOADS',
+  START_RANDOM_DOWNLOADS: 'START_RANDOM_DOWNLOADS',
   REAL_TIME_TOGGLED: 'REAL_TIME_TOGGLED',
+  RANDOM_GENERATOR_CONFIG_SAVED: 'RANDOM_GENERATOR_CONFIG_SAVED',
+  STOP_RANDOM_DOWNLOADS: 'STOP_RANDOM_DOWNLOADS',
 };
 
 const downloadsRef = firebase.downloadsRef;
@@ -46,28 +49,45 @@ function rangeSelected({ commit, dispatch }, dateRange) {
 }
 
 function newDataPointReceived({ commit }, dataPoint) {
-  console.log('commiting', dataPoint);
   commit(mutations.names.UPDATE_LAST_DATAPOINT, dataPoint);
 }
 
-function generateRandomDownloads({ commit }, { numberOfDownloads, delay }) {
-  let count = 0;
-  const intervalId = setInterval(() => {
+let intervalId;
+function startRandomDownloads({ commit, state }) {
+  commit(mutations.names.FLUSH_DATA_POINTS);
+  console.log('Generating downloads points each', state, 'ms');
+  intervalId = setInterval(() => {
     firebase.downloadsRef.push({
       lat: geoUtils.generateRandomLatitude(),
       lon: geoUtils.generateRandomLongitude(),
-      downloaded_at: moment().unix(),
-      country: 'ITALY',
+      // downloaded_at: moment().unix(),
+      // country: 'ITALY',
     });
-    count++;
-    if (count == numberOfDownloads) {
-      clearInterval(intervalId);
-    }
-  }, delay);
+  }, state.randomGeneratorConfig.delay);
 }
 
-function realTimeToggled({ commit }, newStatus) {
+function stopRandomDownloads({ commit }) {
+  console.log('Stop random generator');
+  clearInterval(intervalId);
+  commit(mutations.names.FLUSH_DATA_POINTS);
+}
+
+function realTimeToggled({ dispatch, commit }, newStatus) {
   commit(mutations.names.UPDATE_REAL_TIME, newStatus);
+
+  if (newStatus) {
+    dispatch(names.START_RANDOM_DOWNLOADS);
+  } else {
+    dispatch(names.STOP_RANDOM_DOWNLOADS);
+  }
+}
+
+function randomGeneratorConfigSaved({ commit, dispatch, state }, config) {
+  commit(mutations.names.UPDATE_RANDOM_GENERATOR_CONFIG, config);
+  if (state.isRealTimeActive) {
+    dispatch(names.STOP_RANDOM_DOWNLOADS);
+    dispatch(names.START_RANDOM_DOWNLOADS);
+  }
 }
 
 export default {
@@ -77,8 +97,10 @@ export default {
     [names.RESET_FILTERS]: resetFilters,
     [names.RANGE_SELECTED]: rangeSelected,
     [names.NEW_DATA_POINT_RECEIVED]: newDataPointReceived,
-    [names.GENERATE_RANDOM_DOWNLOADS]: generateRandomDownloads,
+    [names.START_RANDOM_DOWNLOADS]: startRandomDownloads,
     [names.REAL_TIME_TOGGLED]: realTimeToggled,
+    [names.RANDOM_GENERATOR_CONFIG_SAVED]: randomGeneratorConfigSaved,
+    [names.STOP_RANDOM_DOWNLOADS]: stopRandomDownloads,
   },
   names,
 };

@@ -11,49 +11,25 @@
         </md-button>
 
         <md-menu-content>
-          <md-menu-item @click="dialogActive = true">Generate Random Points</md-menu-item>
+          <md-menu-item @click="dialogActive = true">Config Random Points</md-menu-item>
         </md-menu-content>
+
+        <RealTimeConfig :dialogActive="dialogActive" @close="dialogActive = false"></RealTimeConfig>
       </md-menu>
     </md-toolbar>
-
-    <md-dialog :md-active.sync="dialogActive">
-      <md-dialog-title>Generate Random Downloads</md-dialog-title>
-
-      <div class="md-layout md-gutter">
-        <div class="md-layout-item">
-          <md-field>
-            <label>Number of Downloads</label>
-            <md-input v-model="numberOfPoints" type="number"></md-input>
-          </md-field>
-        </div>
-
-        <div class="md-layout-item">
-          <md-field>
-            <label>Delay (ms)</label>
-            <md-input v-model="delayBetweenPoints" type="number"></md-input>
-          </md-field>
-        </div>
-      </div>
-
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="dialogActive = false">Cancel</md-button>
-        <md-button class="md-primary" @click="onGenerateClicked">Generate</md-button>
-      </md-dialog-actions>
-    </md-dialog>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import actions from '../../store/actions';
+import RealTimeConfig from '../RealTimeConfig/RealTimeConfig';
 
 export default {
   name: 'NavBar',
   data() {
     return {
       dialogActive: false,
-      numberOfPoints: 10,
-      delayBetweenPoints: 400,
     };
   },
   computed: {
@@ -62,24 +38,17 @@ export default {
         return this.$store.state.isRealTimeActive;
       },
       set(val) {
-        console.log('real time changed', val);
         this.realTimeToggled(val);
       },
     },
   },
   methods: {
-    onGenerateClicked() {
-      this.dialogActive = false;
-      console.log(this.numberOfPoints, this.delayBetweenPoints);
-      this.generateRandomDownloads({
-        numberOfDownloads: this.numberOfPoints,
-        delay: this.delayBetweenPoints,
-      });
-    },
     ...mapActions({
-      generateRandomDownloads: actions.names.GENERATE_RANDOM_DOWNLOADS,
       realTimeToggled: actions.names.REAL_TIME_TOGGLED,
     }),
+  },
+  components: {
+    RealTimeConfig,
   },
 };
 </script>

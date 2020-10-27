@@ -37,7 +37,7 @@ export default {
     syncFirebase() {
       firebase.downloadsRef
         .orderByChild('downloaded_at')
-        .limitToLast(10)
+        .limitToLast(1)
         .on('child_added', snapshot => {
           console.log('child_added', snapshot.val());
           this.newDataPointReceived(snapshot.val());

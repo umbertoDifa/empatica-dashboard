@@ -6,7 +6,6 @@
     <div class="md-layout-item md-size-60">
       <FiltersDateRangePicker></FiltersDateRangePicker>
     </div>
-    <spacer />
     <ResetButton></ResetButton>
   </div>
 </template>
