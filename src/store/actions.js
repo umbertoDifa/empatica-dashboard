@@ -11,6 +11,7 @@ const names = {
   RANGE_SELECTED: 'RANGE_SELECTED',
   NEW_DATA_POINT_RECEIVED: 'NEW_DATA_POINT_RECEIVED',
   GENERATE_RANDOM_DOWNLOADS: 'GENERATE_RANDOM_DOWNLOADS',
+  REAL_TIME_TOGGLED: 'REAL_TIME_TOGGLED',
 };
 
 const downloadsRef = firebase.downloadsRef;
@@ -65,6 +66,10 @@ function generateRandomDownloads({ commit }, { numberOfDownloads, delay }) {
   }, delay);
 }
 
+function realTimeToggled({ commit }, newStatus) {
+  commit(mutations.names.UPDATE_REAL_TIME, newStatus);
+}
+
 export default {
   map: {
     [names.FETCH_DOWNLOADS]: fetchDownloads,
@@ -73,6 +78,7 @@ export default {
     [names.RANGE_SELECTED]: rangeSelected,
     [names.NEW_DATA_POINT_RECEIVED]: newDataPointReceived,
     [names.GENERATE_RANDOM_DOWNLOADS]: generateRandomDownloads,
+    [names.REAL_TIME_TOGGLED]: realTimeToggled,
   },
   names,
 };

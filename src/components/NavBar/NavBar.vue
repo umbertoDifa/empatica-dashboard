@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div id="navbar">
     <md-toolbar class="md-primary">
       <h3 class="md-title" style="flex: 1">Empatica</h3>
+
+      <md-switch v-model="isRealTimeActive"><strong>Real Time</strong></md-switch>
 
       <md-menu md-direction="bottom-end">
         <md-button md-menu-trigger>
@@ -54,6 +56,17 @@ export default {
       delayBetweenPoints: 400,
     };
   },
+  computed: {
+    isRealTimeActive: {
+      get() {
+        return this.$store.state.isRealTimeActive;
+      },
+      set(val) {
+        console.log('real time changed', val);
+        this.realTimeToggled(val);
+      },
+    },
+  },
   methods: {
     onGenerateClicked() {
       this.dialogActive = false;
@@ -65,6 +78,7 @@ export default {
     },
     ...mapActions({
       generateRandomDownloads: actions.names.GENERATE_RANDOM_DOWNLOADS,
+      realTimeToggled: actions.names.REAL_TIME_TOGGLED,
     }),
   },
 };

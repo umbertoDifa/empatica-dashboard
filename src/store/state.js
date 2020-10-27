@@ -8,6 +8,7 @@ const state = Object.freeze({
     endDate: moment(),
   },
   lastDataPoint: [],
+  isRealTimeActive: false,
 });
 
 export { state };

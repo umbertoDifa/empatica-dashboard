@@ -1,7 +1,7 @@
 <template>
   <div id="viz">
-    <!-- <BarChart :data="dataPoints"></BarChart> -->
-    <RealTimeMap></RealTimeMap>
+    <RealTimeMap v-if="isRealTimeActive"></RealTimeMap>
+    <BarChart v-else :data="dataPoints"></BarChart>
   </div>
 </template>
 
@@ -18,11 +18,17 @@ export default {
     ...mapGetters({
       dataPoints: getters.names.FILTERED_DATA_POINTS,
     }),
+    isRealTimeActive() {
+      return this.$store.state.isRealTimeActive;
+    },
   },
   methods: {
     ...mapActions({
       fetchData: actions.names.DOWNLOADS_UPDATED,
     }),
+  },
+  mounted() {
+    console.log('height', this.$el.clientHeight);
   },
   components: {
     BarChart,
@@ -35,5 +41,6 @@ export default {
 #viz {
   min-height: 400px;
   background-color: greenyellow;
+  height: 100%;
 }
 </style>

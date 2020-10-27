@@ -1,13 +1,13 @@
 <template>
-  <md-button @click="() => resetFilters()" id="reset-button" class="md-primary"
+  <md-button @click="() => resetFilters()" id="reset-button" class="md-primary md-raised"
     >Reset</md-button
   >
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 
-import actions from '../../../store/actions'
+import actions from '../../../store/actions';
 
 export default {
   name: 'ResetButton',
@@ -16,5 +16,5 @@ export default {
       resetFilters: actions.names.RESET_FILTERS,
     }),
   },
-}
+};
 </script>
