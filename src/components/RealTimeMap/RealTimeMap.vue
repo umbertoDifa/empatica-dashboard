@@ -42,7 +42,6 @@ export default {
   watch: {
     lastPoint(newQueue) {
       console.log('showing dot', newQueue);
-      //   this.clearDots()
       for (let i = this.processedPoints; i < newQueue.length; i++) {
         this.showDot(newQueue[i].lat, newQueue[i].lon);
         this.processedPoints++;
@@ -77,10 +76,14 @@ export default {
   mounted() {
     const pi = Math.PI;
     this.tau = 2 * pi;
-    this.scale = 1 << 10;
-    this.width = Math.max(960, window.innerWidth);
-    this.height = Math.max(500, window.innerHeight);
 
+    const navBarSize = d3.select('#navbar').node().getBoundingClientRect().height;
+    const counterSize = d3.select('#counter').node().getBoundingClientRect().height;
+    const screenWidth = d3.select('body').node().getBoundingClientRect().width;
+
+    this.width = Math.max(960, screenWidth);
+    this.height = Math.max(500, window.innerHeight - navBarSize - counterSize);
+    this.scale = this.height; // 1 << 9;
     const path = d3.geoPath().projection(this.projection);
 
     const tiles = d3

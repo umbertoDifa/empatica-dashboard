@@ -3,7 +3,7 @@
     <NavBar></NavBar>
 
     <div class="md-layout rows">
-      <div class="md-layout-item md-layout">
+      <div v-if="!isRealTimeActive" class="md-layout-item md-layout">
         <div class="md-layout x"><Filters></Filters></div>
       </div>
 
@@ -42,6 +42,11 @@ export default {
           console.log('child_added', snapshot.val());
           this.newDataPointReceived(snapshot.val());
         });
+    },
+  },
+  computed: {
+    isRealTimeActive() {
+      return this.$store.state.isRealTimeActive;
     },
   },
   mounted() {

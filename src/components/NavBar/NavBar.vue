@@ -54,10 +54,6 @@ export default {
 </script>
 
 <style>
-.md-toolbar {
-  margin-top: 30px;
-}
-
 .md-layout.md-gutter {
   margin: 10px;
 }

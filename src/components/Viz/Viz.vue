@@ -38,6 +38,5 @@ export default {
 #viz {
   min-height: 400px;
   background-color: greenyellow;
-  height: 100%;
 }
 </style>

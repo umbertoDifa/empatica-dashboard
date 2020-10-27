@@ -10,7 +10,7 @@ const state = Object.freeze({
   lastDataPoint: [],
   isRealTimeActive: false,
   randomGeneratorConfig: {
-    delay: 1000,
+    delay: 10000000,
   },
 });
 
