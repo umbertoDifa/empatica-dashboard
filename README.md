@@ -2,7 +2,8 @@
 
 # empatica-dashboard
 
-> A dashboard to explore and visualize real time empatica apps downloads
+A dashboard to explore and visualize real time empatica apps downloads.
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://empatica-dashboard-2228d.web.app/)
 
 # How to run
 
