@@ -42,14 +42,12 @@ export default {
       }
 
       const data = this.data;
-      console.log(data);
       if (data == undefined || data.length == 0) {
         this.clearChart();
         return;
       }
 
       data.forEach(d => (d.time = new Date(d.downloaded_at * 1000)));
-      console.log(data);
 
       var x = d3.scaleTime().range([0, this.width - this.margin.left - this.margin.right]);
       var y = d3.scaleLinear().range([this.height, 0]);
@@ -58,20 +56,13 @@ export default {
       timestampExtent[0] = timeUtils.floorHour(timestampExtent[0]);
       timestampExtent[1] = timeUtils.ceilHour(timestampExtent[1]);
 
-      console.log(timestampExtent);
-
       // Create one bin per hour
       const binSizeInHours = Math.min(
         50,
         Math.round(Math.abs(timestampExtent[1] - timestampExtent[0]) / 36e5 / 50)
       );
-      console.log(
-        'binSizeInHours',
-        binSizeInHours,
-        Math.round(Math.abs(timestampExtent[1] - timestampExtent[0]) / 36e5)
-      );
+
       const hourBins = d3.utcHours(timestampExtent[0], timestampExtent[1], binSizeInHours);
-      console.log('bins', hourBins);
 
       // Use the histogram layout to create a function that will bin the data
       var binByHour = d3
@@ -81,7 +72,6 @@ export default {
 
       // Bin the data by hour
       var histData = binByHour(data);
-      console.log(histData);
 
       // Scale the range of the data by setting the domain
       x.domain(d3.extent(timestampExtent));

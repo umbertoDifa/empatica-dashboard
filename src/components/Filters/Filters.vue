@@ -1,9 +1,12 @@
 <template>
   <div id="filters" class="md-layout md-gutter">
-    <div class="md-layout-item md-size-30">
+    <div class="md-layout-item md-size-20">
       <FiltersCountry></FiltersCountry>
     </div>
-    <div class="md-layout-item md-size-60">
+    <div class="md-layout-item md-size-20">
+      <FiltersApp></FiltersApp>
+    </div>
+    <div class="md-layout-item md-size-40 date-range">
       <FiltersDateRangePicker></FiltersDateRangePicker>
     </div>
     <ResetButton></ResetButton>
@@ -22,6 +25,7 @@ import moment from 'moment';
 import ResetButton from './ResetButton/ResetButton';
 import FiltersDateRangePicker from './FiltersDateRangePicker/FiltersDateRangePicker';
 import FiltersCountry from './FiltersCountry/FiltersCountry';
+import FiltersApp from './FiltersApp/FiltersApp';
 
 export default {
   name: 'Filters',
@@ -54,16 +58,21 @@ export default {
   },
   mounted() {
     this.rangeSelected({
-      startDate: moment('2010-10-10 24:00:00').unix() * 1000,
-      endDate: moment('2030-10-10 24:00:00').unix() * 1000,
+      startDate: this.$store.state.dateRange.startDate,
+      endDate: this.$store.state.dateRange.endDate,
     });
   },
   components: {
     ResetButton,
     FiltersDateRangePicker,
     FiltersCountry,
+    FiltersApp,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.date-range {
+  margin-top: 10px;
+}
+</style>

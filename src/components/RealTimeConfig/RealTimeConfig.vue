@@ -34,6 +34,7 @@ export default {
       get() {
         return !!this.dialogActive;
       },
+      set() {},
     },
     delayBetweenPoints: {
       get() {

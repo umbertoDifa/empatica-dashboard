@@ -14,19 +14,25 @@ const names = {
   REAL_TIME_TOGGLED: 'REAL_TIME_TOGGLED',
   RANDOM_GENERATOR_CONFIG_SAVED: 'RANDOM_GENERATOR_CONFIG_SAVED',
   STOP_RANDOM_DOWNLOADS: 'STOP_RANDOM_DOWNLOADS',
+  APP_ID_SELECTED: 'APP_ID_SELECTED',
 };
 
 const downloadsRef = firebase.downloadsRef;
 const downloadTimestampField = 'downloaded_at';
 
 function fetchDownloads({ commit }, { startTimestamp, endTimestamp }) {
-  console.log(startTimestamp, endTimestamp);
+  // downloadsRef
+  //   .orderByChild(downloadTimestampField)
+  //   .startAt(startTimestamp)
+  //   .endAt(endTimestamp)
+  //   .on('value', snapshot => {
+  //     commit(mutations.names.UPDATE_DOWNLOADS, snapshot.val());
+  //   });
   downloadsRef
     .orderByChild(downloadTimestampField)
     .startAt(startTimestamp)
     .endAt(endTimestamp)
-    .on('value', snapshot => {
-      console.log('found', snapshot.val());
+    .once('value', snapshot => {
       commit(mutations.names.UPDATE_DOWNLOADS, snapshot.val());
     });
 }
@@ -37,11 +43,19 @@ function countrySelected({ commit }, country) {
 
 function resetFilters({ dispatch }) {
   dispatch(names.COUNTRY_SELECTED, 'WORLD');
-  dispatch(names.RANGE_SELECTED, stateModule.state.dateRange);
+  dispatch(names.RANGE_SELECTED, {
+    startDate: moment('2020-01-01 24:00:00').unix() * 1000,
+    endDate: moment('2030-10-10 24:00:00').unix() * 1000,
+  });
+  dispatch(names.APP_ID_SELECTED, 'ALL');
 }
 
 function rangeSelected({ commit, dispatch }, dateRange) {
-  commit(mutations.names.UPDATE_RANGE, dateRange);
+  console.log('range', dateRange);
+  commit(mutations.names.UPDATE_RANGE, {
+    startDate: moment(dateRange.startDate).unix() * 1000,
+    endDate: moment(dateRange.endDate).unix() * 1000,
+  });
 
   dispatch(names.FETCH_DOWNLOADS, {
     startTimestamp: moment(dateRange.startDate).unix(),
@@ -49,14 +63,18 @@ function rangeSelected({ commit, dispatch }, dateRange) {
   });
 }
 
-function newDataPointReceived({ commit }, dataPoint) {
-  commit(mutations.names.UPDATE_LAST_DATAPOINT, dataPoint);
+function newDataPointReceived({ state, commit }, dataPoint) {
+  commit(mutations.names.UPDATE_LAST_DATAPOINT, dataPoint.val);
+  const totalDataPoints = { ...state.downloads, [dataPoint.key]: dataPoint.val };
+  commit(mutations.names.UPDATE_DOWNLOADS, totalDataPoints);
 }
 
 let intervalId;
 function startRandomDownloads({ commit, state }) {
-  commit(mutations.names.FLUSH_DATA_POINTS);
   console.log('Generating downloads points each', state, 'ms');
+
+  commit(mutations.names.FLUSH_DATA_POINTS);
+
   intervalId = setInterval(() => {
     firebase.downloadsRef.push({
       lat: geoUtils.generateRandomLatitude(),
@@ -83,11 +101,17 @@ function realTimeToggled({ dispatch, commit }, newStatus) {
 }
 
 function randomGeneratorConfigSaved({ commit, dispatch, state }, config) {
+  // Do not allow datapoints creation faster than 1 each second
+  config.delay = Math.max(1000, config.delay);
   commit(mutations.names.UPDATE_RANDOM_GENERATOR_CONFIG, config);
   if (state.isRealTimeActive) {
     dispatch(names.STOP_RANDOM_DOWNLOADS);
     dispatch(names.START_RANDOM_DOWNLOADS);
   }
+}
+
+function appIdSelected({ commit }, appId) {
+  commit(mutations.names.UPDATED_SELECTED_APP, appId);
 }
 
 export default {
@@ -101,6 +125,7 @@ export default {
     [names.REAL_TIME_TOGGLED]: realTimeToggled,
     [names.RANDOM_GENERATOR_CONFIG_SAVED]: randomGeneratorConfigSaved,
     [names.STOP_RANDOM_DOWNLOADS]: stopRandomDownloads,
+    [names.APP_ID_SELECTED]: appIdSelected,
   },
   names,
 };

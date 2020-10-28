@@ -9,6 +9,7 @@ const names = {
   UPDATE_RANDOM_GENERATOR_CONFIG: 'UPDATE_RANDOM_GENERATOR_CONFIG',
   FLUSH_DATA_POINTS: 'FLUSH_DATA_POINTS',
   UPDATE_DEFAULT_RANGE: 'UPDATE_DEFAULT_RANGE',
+  UPDATED_SELECTED_APP: 'UPDATED_SELECTED_APP',
 };
 
 function updateDownloads(state, downloads) {
@@ -17,6 +18,10 @@ function updateDownloads(state, downloads) {
 
 function updateCountry(state, country) {
   Vue.set(state, 'selectedCountry', country);
+}
+
+function updateAppId(state, appId) {
+  Vue.set(state, 'appId', appId);
 }
 
 function updateRange(state, dateRange) {
@@ -39,10 +44,6 @@ function updateRandomGeneratorConfig(state, config) {
   state.randomGeneratorConfig = { ...config };
 }
 
-function updateDefaultRange(state, newRange) {
-  state.defaultRange = { ...newRange };
-}
-
 export default {
   names,
   map: {
@@ -53,6 +54,6 @@ export default {
     [names.UPDATE_REAL_TIME]: updateRealTime,
     [names.UPDATE_RANDOM_GENERATOR_CONFIG]: updateRandomGeneratorConfig,
     [names.FLUSH_DATA_POINTS]: flushDataPoints,
-    [names.UPDATE_DEFAULT_RANGE]: updateDefaultRange,
+    [names.UPDATED_SELECTED_APP]: updateAppId,
   },
 };

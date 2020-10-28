@@ -35,8 +35,8 @@ export default {
         .orderByChild('downloaded_at')
         .limitToLast(1)
         .on('child_added', snapshot => {
-          console.log('child_added', snapshot.val());
-          this.newDataPointReceived(snapshot.val());
+          console.log('the point', snapshot);
+          this.newDataPointReceived({ key: snapshot.key, val: snapshot.val() });
         });
     },
   },
