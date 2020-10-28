@@ -1,5 +1,5 @@
 <template>
-  <div class="md-layout md-gutter">
+  <div id="filters" class="md-layout md-gutter">
     <div class="md-layout-item md-size-30">
       <FiltersCountry></FiltersCountry>
     </div>
@@ -53,7 +53,10 @@ export default {
     }),
   },
   mounted() {
-    this.rangeSelected(this.dateRange);
+    this.rangeSelected({
+      startDate: moment('2010-10-10 24:00:00').unix() * 1000,
+      endDate: moment('2030-10-10 24:00:00').unix() * 1000,
+    });
   },
   components: {
     ResetButton,

@@ -2,7 +2,7 @@
   <md-field>
     <md-select v-model="selectedCountry" name="country" id="country" placeholder="Country">
       <md-option v-for="country in countries" :class="country" :key="country" :value="country">
-        {{ country }}
+        {{ country }} ( {{ countPointsByCountry(country) }})
       </md-option>
     </md-select>
   </md-field>
@@ -20,6 +20,7 @@ export default {
   computed: {
     ...mapGetters({
       countries: getters.names.COUNTRIES,
+      dataPoints: getters.names.DATA_POINTS,
     }),
     selectedCountry: {
       get() {
@@ -31,6 +32,12 @@ export default {
     },
   },
   methods: {
+    countPointsByCountry(country) {
+      if (country == 'WORLD') {
+        return this.dataPoints.length;
+      }
+      return this.dataPoints.filter(dp => dp.country == country).length;
+    },
     ...mapActions({
       countrySelected: actions.names.COUNTRY_SELECTED,
     }),

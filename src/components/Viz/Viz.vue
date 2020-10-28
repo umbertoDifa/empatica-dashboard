@@ -37,6 +37,5 @@ export default {
 <style scoped>
 #viz {
   min-height: 400px;
-  background-color: greenyellow;
 }
 </style>

@@ -22,6 +22,13 @@ export default {
         .scale(+this.scale / this.tau)
         .translate([this.width / 2, this.height / 2]);
     },
+    height() {
+      const navBarSize = d3.select('#navbar').node().getBoundingClientRect().height;
+      return Math.max(
+        500,
+        window.innerHeight - navBarSize - this.config.margin.top - this.config.margin.bottom
+      );
+    },
   },
   data() {
     return {
@@ -29,11 +36,17 @@ export default {
       config: {
         radius: {
           start: 0,
-          end: 7,
+          end: 10,
         },
         opacity: {
           start: 0,
           end: 1,
+        },
+        margin: {
+          top: 20,
+          bottom: 20,
+          left: 20,
+          right: 20,
         },
         transitionTime: 1000,
       },
@@ -56,6 +69,7 @@ export default {
       console.log('showing single dot');
       const circle = this.svg
         .append('circle')
+        .style('fill', '#ff5252')
         .attr('r', this.config.radius.start)
         .style('opacity', this.config.opacity.start)
         .attr('transform', () => 'translate(' + this.projection([lon, lat]) + ')');
@@ -77,13 +91,19 @@ export default {
     const pi = Math.PI;
     this.tau = 2 * pi;
 
-    const navBarSize = d3.select('#navbar').node().getBoundingClientRect().height;
-    const counterSize = d3.select('#counter').node().getBoundingClientRect().height;
-    const screenWidth = d3.select('body').node().getBoundingClientRect().width;
+    this.svg = d3
+      .select('#map')
+      .style('margin-top', this.config.margin.top + 'px')
+      .style('margin-bottom', this.config.margin.bottom + 'px')
+      .style('margin-left', this.config.margin.left + 'px')
+      .style('margin-right', this.config.margin.right + 'px')
+      .append('svg')
+      .attr('width', '100%')
+      .attr('height', this.height);
 
+    const screenWidth = d3.select('#map svg').node().getBoundingClientRect().width;
     this.width = Math.max(960, screenWidth);
-    this.height = Math.max(500, window.innerHeight - navBarSize - counterSize);
-    this.scale = this.height; // 1 << 9;
+    this.scale = this.height * 2;
     const path = d3.geoPath().projection(this.projection);
 
     const tiles = d3
@@ -91,12 +111,6 @@ export default {
       .size([this.width, this.height])
       .scale(+this.scale)
       .translate(this.projection([0, 0]))();
-
-    this.svg = d3
-      .select('#map')
-      .append('svg')
-      .attr('width', this.width)
-      .attr('height', this.height);
 
     const raster = this.svg.append('g');
     const image = raster

@@ -4,13 +4,13 @@ const state = Object.freeze({
   downloads: {},
   selectedCountry: 'WORLD',
   dateRange: {
-    startDate: moment(), //moment("2014-02-27T10:00:00"),
-    endDate: moment(),
+    startDate: moment('2010-10-10 24:00:00').unix() * 1000,
+    endDate: moment('2030-10-10 24:00:00').unix() * 1000,
   },
   lastDataPoint: [],
   isRealTimeActive: false,
   randomGeneratorConfig: {
-    delay: 10000000,
+    delay: 1000,
   },
 });
 

@@ -18,8 +18,13 @@ function generateRandomLongitude() {
   return Math.random() * (LONGITUDE.MAX - LONGITUDE.MIN) + LONGITUDE.MIN;
 }
 
+function generateRandomAppId() {
+  return ['IOS', 'MATE'][Math.round(Math.random() * 1)];
+}
+
 export default {
   generateRandomCoordinates,
   generateRandomLatitude,
   generateRandomLongitude,
+  generateRandomAppId,
 };

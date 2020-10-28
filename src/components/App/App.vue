@@ -6,13 +6,10 @@
       <div v-if="!isRealTimeActive" class="md-layout-item md-layout">
         <div class="md-layout x"><Filters></Filters></div>
       </div>
+      <md-divider></md-divider>
 
       <div class="md-layout-item md-layout">
         <div class="md-layout-item"><Viz></Viz></div>
-      </div>
-
-      <div class="md-layout-item md-layout">
-        <div class="md-layout-item"><Counter></Counter></div>
       </div>
     </div>
   </div>
@@ -23,7 +20,6 @@ import Vue from 'vue';
 import NavBar from '../NavBar/NavBar';
 import Filters from '../Filters/Filters';
 import Viz from '../Viz/Viz';
-import Counter from '../Counter/Counter';
 import firebase from '../../lib/firebase';
 import { mapActions } from 'vuex';
 import actions from '../../store/actions';
@@ -56,7 +52,6 @@ export default {
     NavBar,
     Filters,
     Viz,
-    Counter,
   },
 };
 </script>

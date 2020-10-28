@@ -1,9 +1,8 @@
 import mutations from './mutations';
 import firebase from '../lib/firebase';
-import { state } from '../store/state';
 import moment from 'moment';
 import geoUtils from '../utils/geoUtils';
-import { dispatch } from 'd3';
+import * as stateModule from './state';
 
 const names = {
   FETCH_DOWNLOADS: 'FETCH_DOWNLOADS',
@@ -21,11 +20,13 @@ const downloadsRef = firebase.downloadsRef;
 const downloadTimestampField = 'downloaded_at';
 
 function fetchDownloads({ commit }, { startTimestamp, endTimestamp }) {
+  console.log(startTimestamp, endTimestamp);
   downloadsRef
     .orderByChild(downloadTimestampField)
     .startAt(startTimestamp)
     .endAt(endTimestamp)
     .on('value', snapshot => {
+      console.log('found', snapshot.val());
       commit(mutations.names.UPDATE_DOWNLOADS, snapshot.val());
     });
 }
@@ -36,7 +37,7 @@ function countrySelected({ commit }, country) {
 
 function resetFilters({ dispatch }) {
   dispatch(names.COUNTRY_SELECTED, 'WORLD');
-  dispatch(names.RANGE_SELECTED, state.dateRange);
+  dispatch(names.RANGE_SELECTED, stateModule.state.dateRange);
 }
 
 function rangeSelected({ commit, dispatch }, dateRange) {
@@ -60,8 +61,7 @@ function startRandomDownloads({ commit, state }) {
     firebase.downloadsRef.push({
       lat: geoUtils.generateRandomLatitude(),
       lon: geoUtils.generateRandomLongitude(),
-      // downloaded_at: moment().unix(),
-      // country: 'ITALY',
+      app_id: geoUtils.generateRandomAppId(),
     });
   }, state.randomGeneratorConfig.delay);
 }
