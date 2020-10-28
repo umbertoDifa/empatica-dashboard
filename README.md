@@ -7,7 +7,7 @@ A dashboard to explore and visualize real time empatica apps downloads. Click to
 
 # Demo
 
-[Have a look!](./demo.mp4)
+[Have a look!](https://youtu.be/uZjW0XZyN4A)
 
 # Documentation
 
