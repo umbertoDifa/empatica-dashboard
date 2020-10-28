@@ -1,22 +1,79 @@
-const path = require('path')
-const pkg = require('./package')
+const path = require('path');
+const pkg = require('./package');
 
 module.exports = {
-  entry: [
-    'src/polyfills.js',
-    'src/index.js'
+  transformModules: [
+    'd3-array',
+    'd3-collection',
+    'd3-random',
+    'd3-dsv',
+    'd3-interpolate',
+    'd3-scale',
+    'd3-time',
+    'd3-format',
+    'd3-time-format',
+    'd3-selection-multi',
+    'd3-transition',
+    'd3-ease',
+    'd3-zoom',
+    'd3-drag',
+    'd3-brush',
+    'd3-quadtree',
+    'd3-timer',
+    'd3-dispatch',
+    'd3-color',
+    'd3-scale-chromatic',
+    'd3-hsv',
+    'd3-hcg',
+    'd3-cam16',
+    'd3-queue',
+    'd3-require',
+    'd3-shape',
+    'd3-path',
+    'd3-polygon',
+    'd3-geo-projection',
+    'd3-geo-polygon',
+    'd3-hierarchy',
+    'd3-force',
+    'd3-fetch',
+    'd3-chord',
+    'd3-sankey',
+    'd3-tile',
+    'd3-hexbin',
+    'd3-voronoi',
+    'd3-delaunay',
+    'd3-scale-chromatic',
+    'd3-selection',
+    'd3-transition',
+    'd3-array',
+    'd3-geo',
+    'd3-hierarchy',
+    'd3-random',
+    'd3-interpolate',
+    'd3-contour',
+    'd3-delaunay',
+    'd3-scale',
+    'd3-time-format',
+    'd3-axis',
+    'd3-brush',
+    'd3-dispatch',
+    'd3-drag',
+    'd3-timer',
+    'd3-ease',
+    'd3-chord',
+    'delaunator',
   ],
+
+  entry: ['src/polyfills.js', 'src/index.js'],
   html: {
     title: pkg.productName,
     description: pkg.description,
-    template: path.join(__dirname, 'index.ejs')
+    template: path.join(__dirname, 'index.ejs'),
   },
   postcss: {
     plugins: [
       // Your postcss plugins
-    ]
+    ],
   },
-  presets: [
-    require('poi-preset-bundle-report')()
-  ]
-}
+  presets: [require('poi-preset-bundle-report')()],
+};
